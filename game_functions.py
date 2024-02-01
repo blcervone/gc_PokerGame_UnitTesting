@@ -1,20 +1,17 @@
 # Create cards tuple
-# Create an associated values tuple with corresponding card values
+# Define get_value function
+    # derives value from index plus 2
+    # returns the value
 # Define check_straight function with card1, 2, 3 parameters which will be string values from the cards tuple
-    # Get each card's index number
-    # Get corresponding card value based on index
+    # Call get value on each card
     # Create a sortable iterable (ie list) with the resulting card values
     # Sort that list
     # Create an if/else statement that checks if the sorted values are neighboring sequential values
         # If yes: return largest card's value
         # If no: return 0
 # Define check_3ofa_kind function with card 1, 2, 3 parameters which will be string values from the cards tuple
-    # Get each card's index number
-    # Get corresponding card value based on index
-    # Create a sortable iterable (ie list) with the resulting card values
-    # Sort that list
     # Create an if/else statement that checks if all the card values are equal:
-        # If yes: return largest card's value
+        # If yes: return largest card's value using the get value function
         # If no: return 0
 # Define a check_royalflush function with card 1, 2, 3 parameters which will be string values from the cards tuple
     # Call check_straight passing in the parameter cards
@@ -37,43 +34,28 @@
 # ============================================================================================================= #
 
 cards = ('S2','S3','S4','S5','S6','S7','S8','S9','S10','SJ','SQ','SK','SA')
-cards_values = (2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14)
+# cards_values = (2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14)
 
+def get_value(card):
+    card_index = cards.index(card)
+    card_value = card_index + 2
+    return card_value
 
 def check_straight(card1, card2, card3):
 
-    card1_index = cards.index(card1)
-    card2_index = cards.index(card2)
-    card3_index = cards.index(card3)
-
-    card1_value = cards_values[card1_index]
-    card2_value = cards_values[card2_index]
-    card3_value = cards_values[card3_index]
-
-    card_value_list = [card1_value, card2_value, card3_value]
+    card_value_list = [get_value(card1), get_value(card2), get_value(card3)]
     card_value_list.sort()
 
     if card_value_list[1] == card_value_list[0] + 1 and card_value_list[2] == card_value_list[0] + 2:
-        return card3_value
+        return card_value_list[2]
     else:
         return 0
 
 
 def check_3ofa_kind(card1, card2, card3):
 
-    card1_index = cards.index(card1)
-    card2_index = cards.index(card2)
-    card3_index = cards.index(card3)
-
-    card1_value = cards_values[card1_index]
-    card2_value = cards_values[card2_index]
-    card3_value = cards_values[card3_index]
-
-    card_value_list = [card1_value, card2_value, card3_value]
-    card_value_list.sort()
-
-    if card_value_list[0] == card_value_list[1] and card_value_list[1] == card_value_list[2]:
-        return card3_value
+    if card1 == card2 == card3:
+        return get_value(card3)
     else:
         return 0
 
